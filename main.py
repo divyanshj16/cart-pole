@@ -1,15 +1,25 @@
 import gym
 from naive import *
 import numpy as np
+import argparse
+
+parser = argparse.ArgumentParser(description='Control internal variables RENDER, EPISODES etc.')
+parser.add_argument('--render', action='store_true', help='pass this argument to render', default=False)
+args = parser.parse_args()
 
 EPISODES = 500
 MAX_STEPS = 1000
-FN = random_step
-RENDER = False
+FN = naive_vel_pos
+RENDER = args.render
 PRINT_EVERY = 100
+
+print(FN)
 
 if PRINT_EVERY is None:
 	PRINT_EVERY = EPISODES + 1
+
+if RENDER:
+	EPISODES = 1
 
 env = gym.make('CartPole-v0')
 
